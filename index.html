@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Violencia de Género en Argentina: Una Radiografía</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #EDF2F4;
+        }
+
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+
+        .kpi-number {
+            color: #D90429;
+        }
+
+        .flowchart-step {
+            background-color: #ffffff;
+            border: 2px solid #8D99AE;
+            color: #2B2D42;
+        }
+
+        .flowchart-arrow {
+            color: #D90429;
+        }
+    </style>
+</head>
+
+<body class="text-[#2B2D42]">
+
+    <div class="container mx-auto p-4 md:p-8">
+
+        <header class="text-center mb-12">
+            <h1 class="text-4xl md:text-6xl font-black text-[#D90429] uppercase">Violencia de Género</h1>
+            <p class="text-xl md:text-2xl font-bold text-[#2B2D42] mt-2">Una Radiografía de la Situación en Argentina
+            </p>
+        </header>
+
+        <main>
+            <section id="definition" class="mb-12">
+                <div class="bg-white rounded-lg shadow-xl p-6 md:p-8 text-center">
+                    <h2 class="text-3xl font-bold text-[#2B2D42] mb-4">¿Qué es la Violencia de Género?</h2>
+                    <p class="max-w-3xl mx-auto text-lg text-[#8D99AE] mb-6">Según la <span class="font-bold">Ley
+                            26.485</span> de Protección Integral, se entiende por violencia contra las mujeres toda
+                        conducta, por acción u omisión, basada en una relación desigual de poder, que afecte su vida,
+                        libertad, dignidad, integridad física, psicológica, sexual, económica o patrimonial, como así
+                        también su seguridad personal.</p>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-left">
+                        <div class="bg-[#EDF2F4] p-4 rounded-lg">
+                            <h3 class="font-bold text-lg text-[#D90429]">Basada en el Género</h3>
+                            <p class="text-sm">Se dirige a mujeres y personas LGBTI+ por su condición de género,
+                                perpetuando estereotipos y desigualdades.</p>
+                        </div>
+                        <div class="bg-[#EDF2F4] p-4 rounded-lg">
+                            <h3 class="font-bold text-lg text-[#D90429]">Relación Desigual de Poder</h3>
+                            <p class="text-sm">Ocurre en un contexto de dominación del agresor sobre la víctima, que
+                                puede ser social, económica o afectiva.</p>
+                        </div>
+                        <div class="bg-[#EDF2F4] p-4 rounded-lg">
+                            <h3 class="font-bold text-lg text-[#D90429]">Afecta Múltiples Derechos</h3>
+                            <p class="text-sm">No es solo violencia física. Vulnera la dignidad, la libertad, la
+                                integridad y hasta el derecho a la vida.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="statistics" class="mb-12">
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    <div class="lg:col-span-3 bg-white rounded-lg shadow-xl p-6 md:p-8">
+                        <h2 class="text-3xl font-bold text-[#2B2D42] mb-2 text-center">Las Cifras Oficiales</h2>
+                        <p class="text-center text-lg text-[#8D99AE] mb-8">Los datos recopilados por organismos
+                            oficiales y observatorios muestran una realidad alarmante y persistente.</p>
+                    </div>
+
+                    <div
+                        class="bg-white rounded-lg shadow-xl p-6 md:p-8 flex flex-col justify-center items-center text-center">
+                        <h3 class="text-xl font-bold text-[#2B2D42] mb-2">Un Femicidio Cada</h3>
+                        <p class="text-7xl md:text-8xl font-black kpi-number">34</p>
+                        <p class="text-2xl font-bold">Horas</p>
+                        <p class="text-sm text-[#8D99AE] mt-2">(Primer semestre de 2025)</p>
+                    </div>
+
+                    <div class="bg-white rounded-lg shadow-xl p-6 md:p-8">
+                        <h3 class="text-xl font-bold text-center mb-4">Femicidios Directos en Argentina (2020-2025)</h3>
+                        <div class="chart-container">
+                            <canvas id="femicidesChart"></canvas>
+                        </div>
+                        <p class="text-sm text-center text-[#8D99AE] mt-4">A pesar de las políticas públicas, la cifra
+                            de femicidios se mantiene trágicamente estable, con un promedio de más de 240 casos por año.
+                        </p>
+                    </div>
+
+                    <div class="bg-white rounded-lg shadow-xl p-6 md:p-8">
+                        <h3 class="text-xl font-bold text-center mb-4">Tipos de Violencia Denunciada</h3>
+                        <div class="chart-container">
+                            <canvas id="violenceTypesChart"></canvas>
+                        </div>
+                        <p class="text-sm text-center text-[#8D99AE] mt-4">La violencia psicológica es la más reportada,
+                            a menudo como antesala de la violencia física. Las víctimas sufren múltiples tipos de
+                            violencia simultáneamente.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="dark-figure" class="mb-12">
+                <div class="bg-[#2B2D42] text-white rounded-lg shadow-xl p-6 md:p-8">
+                    <h2 class="text-3xl font-bold text-center mb-4 text-[#EF233C]">La Cifra Negra: Lo que no se ve</h2>
+                    <p class="text-center text-lg text-[#EDF2F4] max-w-3xl mx-auto mb-8">Las estadísticas oficiales solo
+                        muestran la punta del iceberg. Se estima que un alto porcentaje de los casos de violencia de
+                        género nunca son denunciados. Este subregistro, conocido como "cifra negra", oculta la verdadera
+                        dimensión del problema.</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                        <div class="bg-[#8D99AE] p-4 rounded-lg text-center">
+                            <div class="text-4xl mb-2">
+                                <div class="text-4xl mb-2">😨</div>
+                            </div>
+                            <h3 class="font-bold">Miedo al Agresor</h3>
+                            <p class="text-sm">Temor a represalias más violentas si denuncian.</p>
+                        </div>
+                        <div class="bg-[#8D99AE] p-4 rounded-lg text-center">
+                            <div class="text-4xl mb-2">💲</div>
+                            <h3 class="font-bold">Dependencia Económica</h3>
+                            <p class="text-sm">Falta de recursos para subsistir sin el agresor.</p>
+                        </div>
+                        <div class="bg-[#8D99AE] p-4 rounded-lg text-center">
+                            <div class="text-4xl mb-2">⚖️</div>
+                            <h3 class="font-bold">Desconfianza</h3>
+                            <p class="text-sm">Falta de fe en la respuesta del sistema judicial y policial.</p>
+                        </div>
+                        <div class="bg-[#8D99AE] p-4 rounded-lg text-center">
+                            <div class="text-4xl mb-2">❤️‍🩹</div>
+                            <h3 class="font-bold">Vergüenza y Culpa</h3>
+                            <p class="text-sm">Naturalización de la violencia y estigmatización social.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="public-policies">
+                <div class="bg-white rounded-lg shadow-xl p-6 md:p-8">
+                    <h2 class="text-3xl font-bold text-center mb-2">Hacia Políticas Públicas Más Efectivas</h2>
+                    <p class="text-center text-lg text-[#8D99AE] max-w-3xl mx-auto mb-8">Conocer la dimensión real del
+                        fenómeno, incluyendo la cifra negra, es fundamental para diseñar e implementar políticas
+                        públicas que realmente protejan a las víctimas y prevengan la violencia.</p>
+
+                    <div
+                        class="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-4">
+                        <div class="text-center p-4 rounded-lg flowchart-step w-full md:w-1/4">
+                            <h3 class="font-bold">1. Mejores Datos</h3>
+                            <p class="text-sm">Encuestas de victimización y registros unificados para medir la cifra
+                                negra.</p>
+                        </div>
+
+                        <div class="text-5xl flowchart-arrow font-black hidden md:block">&rarr;</div>
+                        <div class="text-5xl flowchart-arrow font-black block md:hidden">&darr;</div>
+
+                        <div class="text-center p-4 rounded-lg flowchart-step w-full md:w-1/4">
+                            <h3 class="font-bold">2. Diagnóstico Preciso</h3>
+                            <p class="text-sm">Identificar barreras de acceso a la justicia y factores de riesgo
+                                invisibilizados.</p>
+                        </div>
+
+                        <div class="text-5xl flowchart-arrow font-black hidden md:block">&rarr;</div>
+                        <div class="text-5xl flowchart-arrow font-black block md:hidden">&darr;</div>
+
+                        <div class="text-center p-4 rounded-lg flowchart-step w-full md:w-1/4">
+                            <h3 class="font-bold">3. Políticas Focalizadas</h3>
+                            <p class="text-sm">Asignar recursos a prevención, asistencia territorial y fortalecimiento
+                                institucional.</p>
+                        </div>
+
+                        <div class="text-5xl flowchart-arrow font-black hidden md:block">&rarr;</div>
+                        <div class="text-5xl flowchart-arrow font-black block md:hidden">&darr;</div>
+
+                        <div class="text-center p-4 rounded-lg bg-[#D90429] text-white border-0 w-full md:w-1/4">
+                            <h3 class="font-bold">4. Reducción Real</h3>
+                            <p class="text-sm">Disminuir la violencia y aumentar la confianza para que más víctimas
+                                denuncien.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="text-center mt-12 pt-6 border-t border-[#8D99AE]">
+            <p class="text-sm text-[#8D99AE]">Fuentes de Datos: Oficina de la Mujer (CSJN), Observatorio de Femicidios
+                en Argentina "Adriana Marisel Zambrano", Observatorio MuMaLá - Mujeres de la Matria Latinoamericana.</p>
+            <p class="text-xs text-[#8D99AE] mt-1">Infografía generada con fines informativos y de concientización.
+                Datos parciales de 2025 basados en proyecciones.</p>
+        </footer>
+    </div>
+
+    <script>
+        const primaryColor = '#D90429';
+        const secondaryColor = '#EF233C';
+        const textColor = '#2B2D42';
+        const gridColor = '#8D99AE';
+
+        function wrapLabel(label, maxLength = 16) {
+            if (typeof label !== 'string' || label.length <= maxLength) {
+                return label;
+            }
+            const words = label.split(' ');
+            const lines = [];
+            let currentLine = '';
+            for (const word of words) {
+                if ((currentLine + word).length > maxLength && currentLine.length > 0) {
+                    lines.push(currentLine.trim());
+                    currentLine = '';
+                }
+                currentLine += word + ' ';
+            }
+            lines.push(currentLine.trim());
+            return lines;
+        }
+
+        const tooltipTitleCallback = function (tooltipItems) {
+            const item = tooltipItems[0];
+            let label = item.chart.data.labels[item.dataIndex];
+            if (Array.isArray(label)) {
+                return label.join(' ');
+            }
+            return label;
+        };
+
+        const femicidesCtx = document.getElementById('femicidesChart').getContext('2d');
+        const femicidesChart = new Chart(femicidesCtx, {
+            type: 'line',
+            data: {
+                labels: ['2020', '2021', '2022', '2023', '2024', '2025*'],
+                datasets: [{
+                    label: 'Femicidios Directos',
+                    data: [287, 251, 247, 251, 247, 164],
+                    backgroundColor: 'rgba(239, 35, 60, 0.2)',
+                    borderColor: secondaryColor,
+                    tension: 0.1,
+                    fill: true,
+                    pointBackgroundColor: primaryColor,
+                    pointRadius: 5
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: false,
+                        grid: { color: gridColor },
+                        ticks: { color: textColor }
+                    },
+                    x: {
+                        grid: { display: false },
+                        ticks: { color: textColor }
+                    }
+                },
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        callbacks: { title: tooltipTitleCallback }
+                    }
+                }
+            }
+        });
+
+        const violenceTypesCtx = document.getElementById('violenceTypesChart').getContext('2d');
+        const originalLabels = ['Psicológica', 'Física', 'Simbólica y/o Ambiental', 'Económica y Patrimonial', 'Sexual'];
+        const wrappedLabels = originalLabels.map(label => wrapLabel(label));
+
+        const violenceTypesChart = new Chart(violenceTypesCtx, {
+            type: 'bar',
+            data: {
+                labels: wrappedLabels,
+                datasets: [{
+                    label: '% de Casos Reportados',
+                    data: [88, 61, 35, 30, 12],
+                    backgroundColor: [
+                        '#D90429',
+                        '#EF233C',
+                        '#2B2D42',
+                        '#8D99AE',
+                        '#AAB4C1'
+                    ],
+                    borderColor: '#EDF2F4',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: {
+                        grid: { color: gridColor },
+                        ticks: {
+                            color: textColor,
+                            callback: function (value) { return value + '%' }
+                        }
+                    },
+                    y: {
+                        grid: { display: false },
+                        ticks: { color: textColor }
+                    }
+                },
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        callbacks: {
+                            title: tooltipTitleCallback,
+                            label: function (context) {
+                                return ` ${context.raw}% de los casos`;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+    </script>
+
+</body>
+
+</html>
+
